@@ -14,6 +14,9 @@ export const initialState = {
         {
           src: "https://www.carta.is/static/img/pix4d-logo-large.png",
         },
+        {
+          src: "https://www.carta.is/static/img/pix4d-logo-large.png",
+        },
       ],
       Comments: [
         {
