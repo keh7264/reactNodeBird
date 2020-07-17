@@ -1,14 +1,14 @@
-import { all, takeLatest, fork, delay, put } from "redux-saga/effects";
 import axios from "axios";
+import { all, delay, fork, put, takeLatest } from "redux-saga/effects";
 import {
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  LOG_OUT_FAILURE,
+  LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
-  LOG_IN_FAILURE,
-  SIGN_UP_REQUEST,
+  LOG_OUT_FAILURE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
   SIGN_UP_FAILURE,
+  SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
 } from "../reducers/user";
 

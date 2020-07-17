@@ -59,12 +59,8 @@ export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
 export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
 
-export const addPost = (data) => {
-  return { type: ADD_POST_REQUEST, data };
-};
-export const addComment = (data) => {
-  return { type: ADD_COMMENT_REQUEST, data };
-};
+export const addPost = (data) => ({ type: ADD_POST_REQUEST, data });
+export const addComment = (data) => ({ type: ADD_COMMENT_REQUEST, data });
 
 // (이전상태, 액션) => 다음상태
 const reducer = (state = initialState, action) => {
