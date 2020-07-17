@@ -1,3 +1,6 @@
+import shorid from "shortid";
+import shortid from "shortid";
+
 export const initialState = {
   mainPosts: [
     {
@@ -38,18 +41,30 @@ export const initialState = {
   addPostLoading: false,
   addPostDone: false,
   addPostError: false,
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: false,
 };
 
-const dummyPost = {
-  id: 2,
+const dummyPost = (data) => ({
+  id: shorid.generate(),
   User: {
     id: 1,
-    nickname: "제로초",
+    nickname: "eunhye",
   },
-  content: "넥스트 고고",
+  content: data,
   Images: [],
   Comments: [],
-};
+});
+
+const dummyComment = (data) => ({
+  id: shortid.generate(),
+  content: data,
+  User: {
+    id: 1,
+    nickname: "eunhye",
+  },
+});
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
@@ -75,7 +90,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostDone: true,
       };
@@ -92,12 +107,21 @@ const reducer = (state = initialState, action) => {
         addCommentDone: false,
         addCommentError: false,
       };
-    case ADD_COMMENT_SUCCESS:
+    case ADD_COMMENT_SUCCESS: {
+      const postIndex = state.mainPosts.findIndex(
+        (v) => v.id === action.data.postId
+      );
+      const post = state.mainPosts[postIndex];
+      const Comments = [dummyComment(action.data.content), ...post.Comments];
+      const mainPosts = [...state.mainPosts];
+      mainPosts[postIndex] = { ...post, Comments };
       return {
         ...state,
+        mainPosts,
         addCommentLoading: false,
         addCommentDone: true,
       };
+    }
     case ADD_COMMENT_FAILURE:
       return {
         ...state,
